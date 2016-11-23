@@ -5,8 +5,7 @@ var isAtStart = 1;       //Used to determine if user is in start area, T/F
 var isAtWaterFall = 0;   //Used to determine if user is in waterfall area, T/F
 var isAtChainRoom = 0;   //Used to determine if user is in chain room area, T/F
 var isAtOrcRoom = 0;     //Used to determine if use is in orc room area, T/F
-var orcAlive = 1;        //Used to determine if orc in orc room is alive, T/F
-var inOrcRoom = 0;  //Used to determine if user is in Orc Room, and also used to determine if user is killed by orc, T/F
+var orcAlive = true;        //Used to determine if orc in orc room is alive, T/F
 var trueCheck = 1;    //Used as a comparable value to set equal to a value to determine if it is true  DO NOT CHANGE
 var falseCheck = 0;   //Used as a comparable value to set equal to a value to determine if it is false  DO NOT CHANGE
 var haveKnife = 1;  //Used to determine if the user has obtained the knife (FROM CHAIN ROOM CHEST)  (FOR USE IN ORC ROOM)
@@ -29,16 +28,16 @@ var kickLockOther = "kick the lock";  //Used to determine if the user wants to k
 var punchLock = "punch lock";  //Used to determine if the user wants to punch the chest lock 1/2 (FOR USE IN CHAIN ROOM WITH CHEST)
 var punchLockOther = "punch the lock";  //Used to determine if the user wants to punch the chest lock 2/2 (FOR USE IN CHAIN ROOM WITH CHEST)
 //DESCRIPTIONS
-var startDesc = "Your eyes snap open.  The dank smell of mildew is strong as you take a deep breath.  The room that you're in is dimly illuminated by a lantern.  There are two passageways leading south and east.";
+var startDesc = "Your eyes snap open.  The dank smell of mildew is strong as you take a deep breath.  The room that you're in is dimly illuminated by a lantern.  There are three passageways leading south, west, and east.";
 var waterFallDesc = "You emerge into open air, with the sound of a roaring waterfall echoing around the cavern you are currently standing in.  A rainbow is reflected in the mist.  A cave entrance leads south, and a passage branches off to the west.";
-var orcRoomLiveDesc = "As you stride into the expanse, the stench of dried blood catches you off guard.  All of the sudden, an axe comes swinging at your head!  You duck in time to see a large, grizzled orc staring down at you.  He seems to be guarding an entrance towards the southeast corner of the room.  Two other entrances enter from the west and north.";
+var orcRoomLiveDesc = "As you stride into the expanse, the stench of dried blood catches you off guard.  All of the sudden, an axe comes swinging at your head!  You duck in time to see a large, grizzled orc staring down at you.  He seems to be guarding an entrance towards the east corner of the room.  Two other entrances enter from the west and north.";
 var orcRoomDesc = "You step into the room, nearly hurling at the new smell of blood coming from the carcass of the orc.  There are exits from the room to the north, west, and east.";
 var magnetRoomDesc = "As soon as you step into the room, your compass starts to go haywire.  There are exits on all walls, and without your compass there is no telling which way is which.";
 var chainRoomDesc = "As you stride into the room, you are almost clobbered by a swinging ball, which is connected to the ceiling by a long, rusty chain.  There's a small chest in the far corner of the room.  The only exits are on the north and east sides.";
 var longRoomDesc = "A gust of air hits you as you emerge into the long corridor.  Windows, large and proud, reveal nothing but earth and rocks.  In the distance to the south, you can see the outline of a doorway.  A winding passageway leads to the west.";
 var cliffDesc = "You fill your lungs with a breath of cool, fresh air.  You emerge on the edge of a cliff, overlooking a ravine that looks to be a couple hundred feet deep.  A lookout post is to the north, and what looks to be a shining piece of golden armor.  Another passageway leads to the south.  A strange amulet of some sort lays buried in the dirt.";
 var barrelRoomDesc = "The sound of trickling water can be heard.  Hundreds of barrels line the walls, full of everything from wine to pig heads.  At one point, a small, scruff figure pops out and rushes off.  At the end of the room, an altar is visible.  A golden key is visible on top of the altar.  The room starts to shake.  THe structure is unstable!  There are no other exits besides the one you came through.";
-var armyOfBonesDesc = "A chill runs through you, making your entire body subconsciously shudders.  You seem to be in a vast underground graveyard!  To the west, a doorway opens.  To the south, a grand, ornamented door yawns.  But all of the sudden, skeletons begin crawling out from all of the graves!  They begin to guard the south side door, and out of the corner of your eye, you spot an archway leading east with the inscription, No fools beyond this point.";
+var armyOfBonesDesc = "A chill runs through you, making your entire body subconsciously shudders.  You seem to be in a vast underground graveyard!  To the west, a doorway opens.  To the south, a grand, ornamented door yawns.  But all of the sudden, skeletons begin crawling out from all of the graves!  They begin to guard the south side door, and out of the corner of your eye, you spot an archway leading east with the inscription, 'No fools beyond this point.'";
 var gottenToChest = "You have successfully gotten to the chest.  There is a small lock on the front, but it looks very rusty and fragile.";
 var layingDown = "You are now laying down, staying safely out of reach from the massive ball swinging from the ceiling.";
 var deadByBall = "You walk into the middle of the room, where the huge ball comes and slams your body into the wall.  You are dead.";
@@ -51,6 +50,7 @@ var deathByCliff = "You step forward, and the floor beneath you begins to crumbl
 var tryToKillOrcNoWeapon = "You look at your hands, and, with no discerable weapon, you clench your fists and take a huge swing at the orc.  It easily sidesteps your blow and whips its massive axe through your stomach.  You are dead.";
 var tryToFleeOrcRoom = "You try to flee from the room, but you stumble and fall to your knees.  The last thing you will ever see is the cold, bare floor of this dungeon you were exiled to.  You can hear the orc's axe whirling through the air behind you, and you brace for the worst.  You are dead on impact.";
 var killedOrc = "The orc takes a wide swing at you, but his long, slow blows are easy to avoid.  You run around him and jump up, puncturing the orc's slimy skin with your rusty dagger and causing the orc to stumble back and fall to the floor with a loud THUMP.  You have defeated the orc.  The exits from this room are to the west, north, and east.";
+var waitingOrcRoomDeath = "You stand there cluelessly as the orc takes advantage of your lack of speed.  He makes a massive cleaving swing with his axe, skimming the walls of the room before it slices you right in half.  You are dead.";
 //ROOM NAMES
 var startRoomName = "START ROOM";  //START ROOM NEEDS NEW NAME
 var chainRoomName = "CHAIN ROOM";
@@ -106,6 +106,8 @@ function startRoom() {
   } else if (choice == goSouth) {
     document.getElementById("output").innerHTML = nothingness;
     chainRoomAccess();
+  } else if (choice == goWest) {
+    longRoomAccess();
   } else if (choice == nothingness) {
     var index = Math.floor(Math.random() * areYouAliveItems.length);
     document.getElementById("output").innerHTML = areYouAliveItems[index];
@@ -262,9 +264,9 @@ function magnetRoom() {
   }
 }
 function orcRoomDetect() {
-  if (orcAlive == trueCheck) {
+  if (orcAlive = true) {
     knifeCheck();
-  } else if (orcAlive == falseCheck) {
+  } else if (orcAlive = false) {
     orcRoomAccess();
   }
 }
@@ -303,14 +305,23 @@ function orcRoomHaveKnifeAccess() {
 function orcRoomHaveKnife() {
   var choice = document.getElementById("userChoice").value;
   var choice = choice.toLowerCase();
+  document.getElementById("userChoice").value = nothingness;
   if (choice == killOrc) {
     document.getElementById("output").innerHTML = killedOrc;
-    var orcAlive = orcAlive - 1;
+    orcAlive = false;
     var haveKnife = haveKnife - 1;
+    orcRoomAccess();
   } else if (choice == killOrcOther) {
     document.getElementById("output").innerHTML = killedOrc;
-    var orcAlive = orcAlive - 1;
+    orcAlive = false;
     var haveKnife = haveKnife - 1;
+    orcRoomAccess();
+  } else if (choice == nothingness) {
+    document.getElementById("output").innerHTML = waitingOrcRoomDeath;
+  } else {
+    var index = Math.floor(Math.random() * dontKnowItems.length);
+    document.getElementById("output").innerHTML = dontKnowItems[index];
+    document.getElementById("userChoice").value = nothingness;
   }
 }
 function orcRoomNoKnifeAccess() {
@@ -323,10 +334,19 @@ function orcRoomNoKnifeAccess() {
 function orcRoomNoKnife() {
   var choice = document.getElementById("userChoice").value;
   var choice = choice.toLowerCase();
+  document.getElementById("userChoice").value = nothingness;
   if (choice == killOrc) {
     document.getElementById("output").innerHTML = tryToKillOrcNoWeapon;
   } else if (choice == killOrcOther) {
     document.getElementById("output").innerHTML = tryToKillOrcNoWeapon;
+  } else if (choice == goNorth) {
+    document.getElementById("output").innerHTML = tryToFleeOrcRoom;
+  } else if (choice == nothingness) {
+    document.getElementById("output").innerHTML = waitingOrcRoomDeath;
+  } else {
+    var index = Math.floor(Math.random() * dontKnowItems.length);
+    document.getElementById("output").innerHTML = dontKnowItems[index];
+    document.getElementById("userChoice").value = nothingness;
   }
 }
 function cliffAccess() {
@@ -352,6 +372,24 @@ function cliff() {
     var index = Math.floor(Math.random() * dontKnowItems.length);
     document.getElementById("output").innerHTML = dontKnowItems[index];
     document.getElementById("userChoice").value = nothingness;
+  }
+}
+function longRoomAccess() {
+  document.getElementById("submit").onclick = longRoom;
+  document.getElementById("userChoice").value = nothingness;
+  document.getElementById("output").innerHTML = nothingness;
+  document.getElementById("areaName").innerHTML = longRoomName;
+  document.getElementById("areaText").innerHTML = longRoomDesc;
+}
+function longRoom() {
+  var choice = document.getElementById("userChoice").value;
+  var choice = choice.toLowerCase();
+  if (choice == goWest) {
+    startRoomAccess();
+  } else if (choice == goNorth) {
+    magnetRoomAccess();
+  } else if (choice == goSouth) {
+    armyOfBonesAccess();
   }
 }
 function armyOfBonesAccess() {
