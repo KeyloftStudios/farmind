@@ -8,8 +8,10 @@ var isAtOrcRoom = 0;     //Used to determine if use is in orc room area, T/F
 var orcAlive = true;        //Used to determine if orc in orc room is alive, T/F
 var trueCheck = 1;    //Used as a comparable value to set equal to a value to determine if it is true  DO NOT CHANGE
 var falseCheck = 0;   //Used as a comparable value to set equal to a value to determine if it is false  DO NOT CHANGE
-var haveKnife = 1;  //Used to determine if the user has obtained the knife (FROM CHAIN ROOM CHEST)  (FOR USE IN ORC ROOM)
+var haveKnife = 0;  //Used to determine if the user has obtained the knife (FROM CHAIN ROOM CHEST)  (FOR USE IN ORC ROOM)
+var hasAmulet = 0;  //Used to determine if the user picked up the amulet (FROM CLIFF) (FOR USE IN ARMY OF BONES)
 //INPUT / CHECK VALUES
+var barrelRoomTurns = 0;
 var startInput = "start";  
 var dontKnow = "I have no idea what you just said!";  //Used when user input is not recognized as a possible choice
 var goEast = "go east";       //Used for determining direction of user input
@@ -27,6 +29,10 @@ var kickLock = "kick lock";  //Used to determine if the user wants to kick the c
 var kickLockOther = "kick the lock";  //Used to determine if the user wants to kick the chest lock 2/2 (FOR USE IN CHAIN ROOM WITH CHEST)
 var punchLock = "punch lock";  //Used to determine if the user wants to punch the chest lock 1/2 (FOR USE IN CHAIN ROOM WITH CHEST)
 var punchLockOther = "punch the lock";  //Used to determine if the user wants to punch the chest lock 2/2 (FOR USE IN CHAIN ROOM WITH CHEST)
+var pickUpAmulet = "pick up amulet";  //Used to determine if the user has picked up the amulet (FROM CLIFF)  (FOR USE IN ARMY OF BONES)
+var pickUpAmuletOther = "pick up the amulet";  //Used to determine if the user has picked up the amulet (FROM CLIFF)  (FOR USE IN ARMY OF BONES)
+var killSkeletons = "kill skeletons";  //Used to determine if the user is trying to take out the skeletons empty-handed (FOR USE IN ARMY OF BONES)
+var killSkeletonsOther = "kill the skeletons";  //Used to determine if the user is trying to take out the skeletons empty-handed (FOR USE IN ARMY OF BONES)
 //DESCRIPTIONS
 var startDesc = "Your eyes snap open.  The dank smell of mildew is strong as you take a deep breath.  The room that you're in is dimly illuminated by a lantern.  There are three passageways leading south, west, and east.";
 var waterFallDesc = "You emerge into open air, with the sound of a roaring waterfall echoing around the cavern you are currently standing in.  A rainbow is reflected in the mist.  A cave entrance leads south, and a passage branches off to the west.";
@@ -37,7 +43,7 @@ var chainRoomDesc = "As you stride into the room, you are almost clobbered by a 
 var longRoomDesc = "A gust of air hits you as you emerge into the long corridor.  Windows, large and proud, reveal nothing but earth and rocks.  In the distance to the south, you can see the outline of a doorway.  A winding passageway leads to the west.";
 var cliffDesc = "You fill your lungs with a breath of cool, fresh air.  You emerge on the edge of a cliff, overlooking a ravine that looks to be a couple hundred feet deep.  A lookout post is to the north, and what looks to be a shining piece of golden armor.  Another passageway leads to the south.  A strange amulet of some sort lays buried in the dirt.";
 var barrelRoomDesc = "The sound of trickling water can be heard.  Hundreds of barrels line the walls, full of everything from wine to pig heads.  At one point, a small, scruff figure pops out and rushes off.  At the end of the room, an altar is visible.  A golden key is visible on top of the altar.  The room starts to shake.  THe structure is unstable!  There are no other exits besides the one you came through.";
-var armyOfBonesDesc = "A chill runs through you, making your entire body subconsciously shudders.  You seem to be in a vast underground graveyard!  To the west, a doorway opens.  To the south, a grand, ornamented door yawns.  But all of the sudden, skeletons begin crawling out from all of the graves!  They begin to guard the south side door, and out of the corner of your eye, you spot an archway leading east with the inscription, 'No fools beyond this point.'";
+var armyOfBonesDesc = "A chill runs through you, making your entire body subconsciously shudders.  You seem to be in a vast underground graveyard!  To the west, a doorway opens.  To the west, a grand, ornamented door yawns.  But all of the sudden, skeletons begin crawling out from all of the graves!  They begin to guard the south side door, and out of the corner of your eye, you spot an archway leading east with the inscription, 'No fools beyond this point.'";
 var gottenToChest = "You have successfully gotten to the chest.  There is a small lock on the front, but it looks very rusty and fragile.";
 var layingDown = "You are now laying down, staying safely out of reach from the massive ball swinging from the ceiling.";
 var deadByBall = "You walk into the middle of the room, where the huge ball comes and slams your body into the wall.  You are dead.";
@@ -51,6 +57,11 @@ var tryToKillOrcNoWeapon = "You look at your hands, and, with no discerable weap
 var tryToFleeOrcRoom = "You try to flee from the room, but you stumble and fall to your knees.  The last thing you will ever see is the cold, bare floor of this dungeon you were exiled to.  You can hear the orc's axe whirling through the air behind you, and you brace for the worst.  You are dead on impact.";
 var killedOrc = "The orc takes a wide swing at you, but his long, slow blows are easy to avoid.  You run around him and jump up, puncturing the orc's slimy skin with your rusty dagger and causing the orc to stumble back and fall to the floor with a loud THUMP.  You have defeated the orc.  The exits from this room are to the west, north, and east.";
 var waitingOrcRoomDeath = "You stand there cluelessly as the orc takes advantage of your lack of speed.  He makes a massive cleaving swing with his axe, skimming the walls of the room before it slices you right in half.  You are dead.";
+var roomOfRiddlesDesc = "If the warning on the archway wasn't enough, the smell of spices and oils make you want to rethink your decision to enter this forsaken room.  A sphinx guards the south side exit.  Suddenly, the eyes light up and speaks in a monotone voice: 'lolololololololololololololololololololololololololololololololololol.'";
+var pickedUpAmulet = "You pull the amulet from the goind, coarse dirt falling through your fingers.  You wipe the rest off on your shirt, then examine it more closely.  The front gem, which appears to be a ruby, glows slightly.  The back, made of solid gold, has some strange inscription on it.  You can't read the text, but you do see a picture that slightly resembles a skull.  You shove the amulet into your back pocket.";
+var useAmuletText = "You slide your fingers into your back pocket and lock your fingers around the amulet sitting there.  You slide it out and the gem in the center immediately lights up, nearly blinding you.  By the time your eyes have adjusted to the light, all of the skeletons have somehow dissapeared.";
+var killSkeletonsDesc = "You make a fist and swing at one of the skeletons.  You land a blow square on the side of his skull.  It come clean off, and the room is silent for a long second.  Then, all of the skeletons begin to swarm you.  You don't have enough speed to take them all out before they reach you, and you start to become overwhelmed.  Eventually, the skeletons are upon you, and there is no fighting back.  You are dead.";
+var tryToPushSkeletons = "You try to make your way across the room, avoiding as many skeletons as possible.  A chill runs though your body when you notice that all of their heads are following your position.  Near the end of the room, the density of skeletons is too much, and you push one out of the way.  It falls into three others, causing a loud crash as the bones hit the floor.  You are instantly swarmed and overwhelmed by the remaining skeletons.  You are dead.";
 //ROOM NAMES
 var startRoomName = "START ROOM";  //START ROOM NEEDS NEW NAME
 var chainRoomName = "CHAIN ROOM";
@@ -61,9 +72,11 @@ var cliffRoomName = "CLIFF";
 var barrelRoomName = "BARREL ROOM";
 var longRoomName = "LONG ROOM"; 
 var armyOfBonesName = "ARMY OF BONES";  //NEED A NEW IDEA FOR WHAT TO CALL ARMY OF BONES ROOM.
+var roomOfRiddlesName = "ROOM OF RIDDLES";
 //MISC ITEMS
 var areYouAliveItems = ["Hello?  Anyone there?", "Echo...echo...echo...", "I didn't quite catch that."];
 var dontKnowItems  = ["I have no idea what you just said!", "Nope.  Doesn't ring a bell.", "404 - INPUT NOT FOUND"];
+var directionDetermine = ["0", "1", "2", "3"];
 //INSTRUCTIONS
 var instructionsInput = "instructions";
 var instr1 = "To play, read the description of the room that you are in and enter what you would like to do into the text box, then click Continue";
@@ -181,6 +194,7 @@ function chainRoom() {
      layingDownChainRoomAccess();
   } else if (choice == goToChest) {
      document.getElementById("output").innerHTML = deadByBall;
+     playerAlive = playerAlive - 1;
   } else if (choice == goNorth) {
      startRoomAccess();
   } else if (choice == nothingness) {
@@ -252,8 +266,14 @@ function magnetRoom() {
   var choice = document.getElementById("userChoice").value;
   var choice = choice.toLowerCase();
   if (choice == goNorth) {
-    document.getElementById("output").innerHTML = "LOL";
-  }  else if (choice == nothingness) {
+    magnetRoomDirectionDetermine();
+  } else if(choice == goSouth) {
+    magnetRoomDirectionDetermine();
+  } else if (choice == goEast) {
+    magnetRoomDirectionDetermine();
+  } else if (choice == goWest) {
+    magnetRoomDirectionDetermine();
+  } else if (choice == nothingness) {
     var index = Math.floor(Math.random() * areYouAliveItems.length);
     document.getElementById("output").innerHTML = areYouAliveItems[index];
     document.getElementById("userChoice").value = nothingness;
@@ -264,9 +284,9 @@ function magnetRoom() {
   }
 }
 function orcRoomDetect() {
-  if (orcAlive = true) {
+  if (orcAlive == 1) {
     knifeCheck();
-  } else if (orcAlive = false) {
+  } else if (orcAlive == 0) {
     orcRoomAccess();
   }
 }
@@ -308,14 +328,12 @@ function orcRoomHaveKnife() {
   document.getElementById("userChoice").value = nothingness;
   if (choice == killOrc) {
     document.getElementById("output").innerHTML = killedOrc;
-    orcAlive = false;
-    var haveKnife = haveKnife - 1;
-    orcRoomAccess();
+    orcAlive = orcAlive - 1;
+    orcRoomOrcKilledContinue();
   } else if (choice == killOrcOther) {
     document.getElementById("output").innerHTML = killedOrc;
-    orcAlive = false;
-    var haveKnife = haveKnife - 1;
-    orcRoomAccess();
+    orcAlive = orcAlive - 1;
+    orcRoomOrcKilledContinue();
   } else if (choice == nothingness) {
     document.getElementById("output").innerHTML = waitingOrcRoomDeath;
   } else {
@@ -337,12 +355,16 @@ function orcRoomNoKnife() {
   document.getElementById("userChoice").value = nothingness;
   if (choice == killOrc) {
     document.getElementById("output").innerHTML = tryToKillOrcNoWeapon;
+    playerAlive = playerAlive - 1;
   } else if (choice == killOrcOther) {
     document.getElementById("output").innerHTML = tryToKillOrcNoWeapon;
+    playerAlive = playerAlive - 1;
   } else if (choice == goNorth) {
     document.getElementById("output").innerHTML = tryToFleeOrcRoom;
+    playerAlive = playerAlive - 1;
   } else if (choice == nothingness) {
     document.getElementById("output").innerHTML = waitingOrcRoomDeath;
+    playerAlive = playerAlive - 1;
   } else {
     var index = Math.floor(Math.random() * dontKnowItems.length);
     document.getElementById("output").innerHTML = dontKnowItems[index];
@@ -361,9 +383,16 @@ function cliff() {
   var choice = choice.toLowerCase();
   if (choice == goNorth) {
     document.getElementById("output").innerHTML = deathByCliff;
+    playerAlive = playerAlive - 1;
   } else if (choice == goSouth) {
     document.getElementById("output").innerHTML = nothingness;
     orcRoomDetermine(); 
+  } else if (choice == pickUpAmulet) {
+    document.getElementById("output").innerHTML = pickedUpAmulet;
+    hasAmulet = hasAmulet + 1;
+  } else if (choice == pickUpAmuletOther) {
+    document.getElementById("output").innerHTML = pickedUpAmulet;
+    hasAmulet = hasAmulet + 1;
   } else if (choice == nothingness) {
     var index = Math.floor(Math.random() * areYouAliveItems.length);
     document.getElementById("output").innerHTML = areYouAliveItems[index];
@@ -392,6 +421,14 @@ function longRoom() {
     armyOfBonesAccess();
   }
 }
+function armyOfBonesDetermine() {
+  if (hasAmulet == 0) {
+    armyOfBonesNoAmuletAccess();
+  } else if (hasAmulet == 1) {
+    armyOfBonesAmulet();
+  }
+}
+
 function armyOfBonesAccess() {
   document.getElementById("submit").onclick = armyOfBones;
   document.getElementById("output").innerHTML = nothingness;
@@ -402,4 +439,62 @@ function armyOfBonesAccess() {
 function armyOfBones() {
   var choice = document.getElementById("userChoice").value;
   var choice = choice.toLowerCase();
+}function armyOfBonesNoAmuletAccess() {
+  document.getElementById("submit").onclick = armyOfBonesNoAmulet;
+  document.getElementById("output").innerHTML = nothingness;
+  document.getElementById("userChoice").value = nothingness;
+  document.getElementById("areaText").innerHTML = armyOfBonesDesc;
+  document.getElementById("areaName").innerHTML = armyOfBonesName;
+}
+function armyOfBonesNoAmulet() {
+  var choice = document.getElementById("userChoice").value;
+  var choice = choice.toLowerCase();
+  if (choice == killSkeletons) {
+    document.getElementById("output").innerHTML = killSkeletonsDesc;
+    playerAlive = playerAlive - 1;
+  } else if (choice == killSkeletonsOther) {
+    document.getElementById("output").innerHTML = killSkeletonsDesc;
+    playerAlive = playerAlive - 1;
+  } else if (choice == goNorth) {
+    longRoomAccess();
+  } else if (choice == goSouth) {
+    document.getElementById("output").innerHTML = tryToPushSkeletons;
+    playerAlive = playerAlive - 1;
+  } else if (choice == goWest) {
+    document.getElementById("output").innerHTML = tryToPushSkeletons;
+    playerAlive = playerAlive - 1;
+  } else if (choice == goEast) {
+    document.getElementById("output").innerHTML = tryToPushSkeletons;
+    playerAlive = playerAlive - 1;
+  } else if (choice == nothingness) {
+    var index = Math.floor(Math.random() * areYouAliveItems.length);
+    document.getElementById("output").innerHTML = areYouAliveItems[index];
+    document.getElementById("userChoice").value = nothingness;
+  } else {
+    var index = Math.floor(Math.random() * dontKnowItems.length);
+    document.getElementById("output").innerHTML = dontKnowItems[index];
+    document.getElementById("userChoice").value = nothingness;
+  }
+}
+function barrelRoomAccess() {
+  document.getElementById("submit").onclick = barrelRoom;
+  document.getElementById("userChoice").value = nothingness;
+  document.getElementById("output").innerHTML = nothingness;
+  document.getElementById("areaName").innerHTML = barrelRoomName;
+  document.getElementById("areaText").innerHTML = barrelRoomDesc;
+}
+function barrelRoomCounter() {
+  var choice = document.getElementById("userChoice").value;
+  var choice = choice.toLowerCase();
+}
+function barrelRoom() {
+  var choice = document.getElementById("userChoice").value;
+  var choice = choice.toLowerCase();
+}
+function roomOfRiddlesAccess() {
+  document.getElementById("submit").onclick = roomOfRiddles;
+  document.getElementById("output").innerHTML = nothingness;
+  document.getElementById("userChoice").value = nothingness;
+  document.getElementById("areaText").innerHTML = roomOfRiddlesDesc;
+  document.getElementById("areaName").innerHTML = roomOfRiddlesName;
 }
