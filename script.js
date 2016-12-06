@@ -10,6 +10,8 @@ var trueCheck = 1;    //Used as a comparable value to set equal to a value to de
 var falseCheck = 0;   //Used as a comparable value to set equal to a value to determine if it is false  DO NOT CHANGE
 var haveKnife = 0;  //Used to determine if the user has obtained the knife (FROM CHAIN ROOM CHEST)  (FOR USE IN ORC ROOM)
 var hasAmulet = 0;  //Used to determine if the user picked up the amulet (FROM CLIFF) (FOR USE IN ARMY OF BONES)
+var haveBanner = 0;  //Used to determine if the user has collected the banner (FROM CHAIN ROOM)
+var haveKey = 0; //Used to determine if the user has collected the key (FROM BARREL ROOM)
 //INPUT / CHECK VALUES
 var barrelRoomTurns = 0;
 var startInput = "start";  
@@ -33,6 +35,11 @@ var pickUpAmulet = "pick up amulet";  //Used to determine if the user has picked
 var pickUpAmuletOther = "pick up the amulet";  //Used to determine if the user has picked up the amulet (FROM CLIFF)  (FOR USE IN ARMY OF BONES)
 var killSkeletons = "kill skeletons";  //Used to determine if the user is trying to take out the skeletons empty-handed (FOR USE IN ARMY OF BONES)
 var killSkeletonsOther = "kill the skeletons";  //Used to determine if the user is trying to take out the skeletons empty-handed (FOR USE IN ARMY OF BONES)
+var pickUpKnife = "pick up knife";  //Used to determine if the user wants to pick up the knife (FROM CHAIN ROOM CHEST)  (FOR USE IN ORC ROOM)
+var pickUpKnifeOther = "pick up the knife";  //Used to determine if the user wants to pick up the knife (FROM CHAIN ROOM CHEST)  (FOR USE IN ORC ROOM)
+var pickUpBanner = "pick up banner";  //Used to determine if the user wants to pick up the tattered banner (FROM CHAIN ROOM CHEST)
+var pickUpKey = "pick up key";  //Used to determine if the user wants to pick up the key (FROM BARREL ROOM)
+var pickUpKeyOther = "pick up the key";  //Used to determine if the user wants to pick up the key (FROM BARREL ROOM)
 //DESCRIPTIONS
 var startDesc = "Your eyes snap open.  The dank smell of mildew is strong as you take a deep breath.  The room that you're in is dimly illuminated by a lantern.  There are three passageways leading south, west, and east.";
 var waterFallDesc = "You emerge into open air, with the sound of a roaring waterfall echoing around the cavern you are currently standing in.  A rainbow is reflected in the mist.  A cave entrance leads south, and a passage branches off to the west.";
@@ -62,6 +69,10 @@ var pickedUpAmulet = "You pull the amulet from the goind, coarse dirt falling th
 var useAmuletText = "You slide your fingers into your back pocket and lock your fingers around the amulet sitting there.  You slide it out and the gem in the center immediately lights up, nearly blinding you.  By the time your eyes have adjusted to the light, all of the skeletons have somehow dissapeared.";
 var killSkeletonsDesc = "You make a fist and swing at one of the skeletons.  You land a blow square on the side of his skull.  It come clean off, and the room is silent for a long second.  Then, all of the skeletons begin to swarm you.  You don't have enough speed to take them all out before they reach you, and you start to become overwhelmed.  Eventually, the skeletons are upon you, and there is no fighting back.  You are dead.";
 var tryToPushSkeletons = "You try to make your way across the room, avoiding as many skeletons as possible.  A chill runs though your body when you notice that all of their heads are following your position.  Near the end of the room, the density of skeletons is too much, and you push one out of the way.  It falls into three others, causing a loud crash as the bones hit the floor.  You are instantly swarmed and overwhelmed by the remaining skeletons.  You are dead.";
+var pickedUpKnife = "You slide your fingers around the hilt of the knife, the cold of the metal against your skin makes your fingers go numb.  You pull the knife out of the chest and feel its weight.  After testing out for a little while, you slip it through one of your belt loops.";
+var pickedUpBanner = "You pinch the piece of cloth between two fingers, holding it up to your face for a closer look.  There are some indistinguishable symbols that seem to be from another planet.  You shove it into your front pocket, with the hope that it won't have any negative side effects.";
+var pickedUpKey = "You walk over and grab the key, running the cold metal between your fingers.  Suddenly, water begins to flow into the room, seemingly from all corners of the room.  Soon, your ankles are covered in water.  The room will soon be full.";
+var barrelRoomWallTurnOne = "You peer at the wall, not seeing any discerable door.";
 //ROOM NAMES
 var startRoomName = "START ROOM";  //START ROOM NEEDS NEW NAME
 var chainRoomName = "CHAIN ROOM";
@@ -163,22 +174,22 @@ function waterFallAccess() {
 function waterFallRoom() {
    var choice = document.getElementById("userChoice").value;
    var choice = choice.toLowerCase();
-  if (choice == goWest) {
+   if (choice == goWest) {
      startRoomAccess();
-  } else if (choice == goSouth) {
+   } else if (choice == goSouth) {
      orcRoomDetect();
-  } else if (choice == goWest) {
+   } else if (choice == goWest) {
      var index = Math.floor(Math.random() * areYouAliveItems.length);
      document.getElementById("output").innerHTML = areYouAliveItems[index];
    } else if (choice == nothingness) {
     var index = Math.floor(Math.random() * areYouAliveItems.length);
     document.getElementById("output").innerHTML = areYouAliveItems[index];
     document.getElementById("userChoice").value = nothingness;
-  } else {
+   } else {
     var index = Math.floor(Math.random() * dontKnowItems.length);
     document.getElementById("output").innerHTML = dontKnowItems[index];
     document.getElementById("userChoice").value = nothingness;
-  }
+   }
 }
 function chainRoomAccess() {
    document.getElementById("submit").onclick = chainRoom;
@@ -192,24 +203,24 @@ function chainRoom() {
    var choice = choice.toLowerCase();
    if (choice == layDown) {
      layingDownChainRoomAccess();
-  } else if (choice == goToChest) {
+    } else if (choice == goToChest) {
      document.getElementById("output").innerHTML = deadByBall;
      playerAlive = playerAlive - 1;
-  } else if (choice == goNorth) {
+    } else if (choice == goNorth) {
      startRoomAccess();
-  } else if (choice == nothingness) {
+    } else if (choice == nothingness) {
     var index = Math.floor(Math.random() * areYouAliveItems.length);
     document.getElementById("output").innerHTML = areYouAliveItems[index];
     document.getElementById("userChoice").value = nothingness;
-  } else {
+    } else {
     var index = Math.floor(Math.random() * dontKnowItems.length);
     document.getElementById("output").innerHTML = dontKnowItems[index];
     document.getElementById("userChoice").value = nothingness;
-  }
+    }
 }
 function layingDownChainRoomAccess() {
   document.getElementById("submit").onclick = layingDownChainRoom;
-  document.getElementById("output").innerHTML = nothingness;
+  document.getElementById("output").innerHTML = layingDown;
   document.getElementById("userChoice").value = nothingness;
 }
 function layingDownChainRoom() {
@@ -224,6 +235,10 @@ function layingDownChainRoom() {
     var index = Math.floor(Math.random() * areYouAliveItems.length);
     document.getElementById("output").innerHTML = areYouAliveItems[index];
     document.getElementById("userChoice").value = nothingness;
+  } else if (choice == goNorth) {
+    startRoomAccess();
+  } else if (choice == goEast) {
+    magnetRoomAccess();
   } else {
     var index = Math.floor(Math.random() * dontKnowItems.length);
     document.getElementById("output").innerHTML = dontKnowItems[index];
@@ -239,12 +254,14 @@ function atChestChainRoom() {
   var choice = choice.toLowerCase();
   if (choice == kickLock) {
     document.getElementById("output").innerHTML = chestOpen;
+    chestOpenChainRoom();
   } else if (choice == kickLockOther) {
     document.getElementById("output").innerHTML = chestOpen;
+    chestOpenChainRoom();
   } else if (choice == punchLock) {
-    document.getElementById("output").innerHTML = punchLock;
+    document.getElementById("output").innerHTML = punchChest;
   } else if (choice == punchLockOther) {
-    document.getElementById("output").innerHTML = punchLock;
+    document.getElementById("output").innerHTML = punchChest;
   } else if (choice == nothingness) {
     var index = Math.floor(Math.random() * areYouAliveItems.length);
     document.getElementById("output").innerHTML = areYouAliveItems[index];
@@ -253,6 +270,64 @@ function atChestChainRoom() {
     var index = Math.floor(Math.random() * dontKnowItems.length);
     document.getElementById("output").innerHTML = dontKnowItems[index];
     document.getElementById("userChoice").value = nothingness;
+  }
+}
+function chestOpenChainRoom() {
+  document.getElementById("submit").onclick = chestOpenChainRoom;
+  var choice = document.getElementById("userChoice").value;
+  var choice = choice.toLowerCase();
+  if (choice == pickUpKnife) {
+    document.getElementById("output").innerHTML = pickedUpKnife;
+    haveKnife = haveKnife + 1;
+    chainRoomHaveKnifeNoBannerAccess();
+  } else if (choice == pickUpKnifeOther) {
+    document.getElementById("output").innerHTML = pickedUpKnife;
+    haveKnife = haveKnife + 1;
+    chainRoomHaveKnifeNoBannerAccess();
+  } else if (choice == pickUpBanner) {
+    document.getElementById("output").innerHTML = pickedUpBanner;
+    haveBanner = haveBanner + 1;
+    chainRoomHaveItemsAccess();
+  } else if (choice == pickUpBannerOther) {
+    document.getElementById("output").innerHTML = pickedUpBanner;
+    haveBanner = haveBanner + 1;
+    chainRoomHaveItemsAccess();
+  }
+}
+function chainRoomHaveKnifeNoBannerAccess() {
+  document.getElementById("submit").onclick = chainRoomHaveKnifeNoBanner;
+  document.getElementById("userChoice").value = nothingness;
+}
+function chainRoomHaveKnifeNoBanner() {
+  var choice = document.getElementById("userChoice").value;
+  var choice = choice.toLowerCase();
+  if (choice == pickUpBanner) {
+    document.getElementById("output").innerHTML = pickedUpBanner;
+    haveBanner = haveBanner + 1;
+  } else if (choice == pickUpBannerOther) {
+    document.getElementById("output").innerHTML = pickedUpBanner;
+    haveBanner = haveBanner + 1;
+  } else if (choice == goNorth) {
+    startRoomAccess();
+  } else if (choice == goEast) {
+    magnetRoomAccess();
+  }
+}
+function chainRoomHaveItemsAccess() {
+  document.getElementById("submit").onclick = chainRoomHaveItems;
+  document.getElementById("output").innerHTML = nothingness;
+  document.getElementById("userChoice").value = nothingness;
+}
+function chainRoomHaveItems() {
+  var choice = document.getElementById("userChoice").value;
+  var choice = choice.toLowerCase();
+  if (choice == goNorth) {
+    startRoomAccess();
+  } else if (choice == goEast) {
+    magnetRoomAccess();
+  } else if (choice == standUp) {
+    document.getElementById("output").innerHTML = deadByBallStandUp;
+    playerAlive = playerAlive - 1;
   }
 }
 function magnetRoomAccess() {
@@ -283,6 +358,18 @@ function magnetRoom() {
     document.getElementById("userChoice").value = nothingness;
   }
 }
+function magnetRoomDirectionDetermine() {
+  var index = Math.floor(Math.random() * directionDetermine.length);
+  if (directionDetermine[index] == 0) {
+    chainRoomAccess();
+  } else if (directionDetermine[index] == 1) {
+    magnetRoomAccess();
+  } else if (directionDetermine[index] == 2) {
+    orcRoomDetect();
+  } else if (directionDetermine[index] == 3) {
+    longRoomAccess();
+  }
+}
 function orcRoomDetect() {
   if (orcAlive == 1) {
     knifeCheck();
@@ -295,24 +382,6 @@ function knifeCheck() {
     orcRoomHaveKnifeAccess();
   } else if(haveKnife == falseCheck) {
     orcRoomNoKnifeAccess();
-  }
-}
-function orcRoomAccess() {
-  document.getElementById("submit").onclick = orcRoom;
-  document.getElementById("output").innerHTML = nothingness;
-  document.getElementById("userChoice").value = nothingness;
-  document.getElementById("areaName").innerHTML = orcRoomName;
-  document.getElementById("areaText").innerHTML = orcRoomDesc;
-}
-function orcRoom() {
-  var choice = document.getElementById("userChoice").value;
-  var choice = choice.toLowerCase();
-  if (choice == goNorth) {
-    waterFallAccess();
-  } else if (choice == goEast) {
-    cliffAccess();
-  } else if (choice == goWest) {
-    magnetRoomAccess();
   }
 }
 function orcRoomHaveKnifeAccess() {
@@ -329,17 +398,31 @@ function orcRoomHaveKnife() {
   if (choice == killOrc) {
     document.getElementById("output").innerHTML = killedOrc;
     orcAlive = orcAlive - 1;
-    orcRoomOrcKilledContinue();
+    orcRoomOrcKilledContinueAccess();
   } else if (choice == killOrcOther) {
     document.getElementById("output").innerHTML = killedOrc;
     orcAlive = orcAlive - 1;
-    orcRoomOrcKilledContinue();
+    orcRoomOrcKilledContinueAccess();
   } else if (choice == nothingness) {
     document.getElementById("output").innerHTML = waitingOrcRoomDeath;
   } else {
     var index = Math.floor(Math.random() * dontKnowItems.length);
     document.getElementById("output").innerHTML = dontKnowItems[index];
     document.getElementById("userChoice").value = nothingness;
+  }
+}
+function orcRoomOrcKilledContinueAccess() {
+  document.getElementById("submit").onclick = orcRoomOrcKilledContinue;
+}
+function orcRoomOrcKilledContinue() {
+  var choice = document.getElementById("userChoice").value;
+  var choice = choice.toLowerCase();
+  if (choice == goNorth) {
+    waterFallAccess();
+  } else if (choice == goEast) {
+    cliffAccess();
+  } else if (choice == goWest) {
+    magnetRoomAccess();
   }
 }
 function orcRoomNoKnifeAccess() {
@@ -428,7 +511,6 @@ function armyOfBonesDetermine() {
     armyOfBonesAmulet();
   }
 }
-
 function armyOfBonesAccess() {
   document.getElementById("submit").onclick = armyOfBones;
   document.getElementById("output").innerHTML = nothingness;
@@ -439,7 +521,8 @@ function armyOfBonesAccess() {
 function armyOfBones() {
   var choice = document.getElementById("userChoice").value;
   var choice = choice.toLowerCase();
-}function armyOfBonesNoAmuletAccess() {
+}
+function armyOfBonesNoAmuletAccess() {
   document.getElementById("submit").onclick = armyOfBonesNoAmulet;
   document.getElementById("output").innerHTML = nothingness;
   document.getElementById("userChoice").value = nothingness;
@@ -483,13 +566,60 @@ function barrelRoomAccess() {
   document.getElementById("areaName").innerHTML = barrelRoomName;
   document.getElementById("areaText").innerHTML = barrelRoomDesc;
 }
-function barrelRoomCounter() {
-  var choice = document.getElementById("userChoice").value;
-  var choice = choice.toLowerCase();
+function barrelRoomKeyDetermine() {
+  if (haveKey == 1) {
+    barrelRoomCounterKey();
+  } else if (havekey == 0) {
+    barrelRoomCounterNoKey();
+  }
 }
-function barrelRoom() {
+function barrelRoomCounterNoKey() {
+  if (barrelRoomTurns = 0) {
+    barrelRoomTurnOneAccessNoKey();
+  } else if (barrelRoomTurns = 1) {
+    barrelRoomTurnTwoAccessNoKey();
+  } else if (barrelRoomTurns >= 2) {
+    barrelRoomDeath();
+  }
+}
+function barrelRoomTurnOneAccessNoKey() {
+  document.getElementById("submit").onclick = barrelRoomTurnOneNoKey;
+  document.getElementById("output").innerHTML = nothingness;
+  document.getElementById("userChoice").value = nothingness;
+  document.getElementById("areaText").innerHTML = barrelRoomDesc;
+  document.getElementById("areaName").innerHTML = barrelRoomName;
+}
+function barrelRoomTurnOneNoKey() {
   var choice = document.getElementById("userChoice").value;
   var choice = choice.toLowerCase();
+  if (choice == pickUpKey) {
+    document.getElementById("output").innerHTML = pickedUpKey;
+    haveKey = haveKey + 1;
+    barrelRoomTurnTwoAccessNoKey();
+  } else if (choice == pickUpKeyOther) {
+    document.getElementById("output").innerHTML = pickedUpKey;
+    haveKey = haveKey + 1;
+    barrelRoomTurnTwoAccessNoKey();
+  } else if (choice == goEast) {
+    armyOfBonesDetermine();
+  } else if (choice == goNorth) {
+    document.getElementById("output").innerHTML = barrelRoomWallTurnOne;
+  }
+}
+function barrelRoomTurnTwoAccessNoKey() {
+  document.getElementById("submit").onclick = barrelRoomTurnTwoNoKey;
+  document.getElementById("userChoice").value = nothingness;
+}
+function barrelRoomTurnTwoNoKey() {
+  var choice = document.getElementById("userChoice").value;
+  var choice = choice.toLowerCase();
+  if (choice == pickUpKey) {
+    document.getElementById("output").innerHTML = pickedUpKey;
+    haveKey = haveKey + 1;
+  } else if (choice == pickUpKeyOther) {
+    document.getElementById("output").innerHTML = pickedUpKey;
+    haveKey = haveKey + 1;
+  }
 }
 function roomOfRiddlesAccess() {
   document.getElementById("submit").onclick = roomOfRiddles;
@@ -497,4 +627,8 @@ function roomOfRiddlesAccess() {
   document.getElementById("userChoice").value = nothingness;
   document.getElementById("areaText").innerHTML = roomOfRiddlesDesc;
   document.getElementById("areaName").innerHTML = roomOfRiddlesName;
+}
+function roomOfRiddles() {
+  var choice = document.getElementById("userChoice").value;
+  var choice = choice.toLowerCase();
 }
