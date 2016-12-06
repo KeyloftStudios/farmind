@@ -6,4 +6,8 @@ TO PLAY:
 2. Extract the files from wherever you downloaded them to
 3. Open index.html (You will know if you extracted correctly if the text is all centered; will only load external files if downloaded as zip.)
 
+If you find any game-breaking issues, please e-mail us at keyloftstudios@gmail.com
+When sending us a message, please include:
+1) What room this error occured in
+2) What we can do to recreate the error
 
