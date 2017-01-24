@@ -1,15 +1,24 @@
-h1{
+/*Storyline designed by /u/Realistickitty and code created by /u/topdude155
+/ Copyright 2017 Keyloft Studios
+/ All assets used in this game were created by the developers*/
+
+/*ALWAYS USE PERCENT TO SUPPORT DIFFERENT BROWSER SIZES*/
+* {
+  padding: 0;
+  margin: 0;
+}
+h1{   /*Used to style the main title*/
   text-align: center;
   font-family: Calibri;
 }
 #submitArea{
   text-align: center;
 }
-h2{
+h2{    /*Used to style the header with our usernames*/ 
   text-align: center;
   font-family: Calibri;
 }
-#areaText{
+#areaText{  /*Used to style the description of the area that the player is in*/
   text-align: center;
   font-family: Copperplate Gothic;
   font-size: 20px;
@@ -18,7 +27,7 @@ h2{
   padding-left: 20%;
   padding-right: 20%;
 }
-#output{
+#output{      /*Used to style the output area of the game*/ 
   text-align: center;
   font-family: Copperplate Gothic Light;
   font-size: 18px;
@@ -27,7 +36,7 @@ h2{
   padding-left: 10%;
   padding-right: 10%;
 }
-#areaName{
+#areaName{  /*Used to style the name of the area that the player is in*/
   text-align: center;
   font-family: Copperplate Gothic;
   font-size: 20px;
@@ -36,10 +45,28 @@ h2{
   padding-left: 20%;
   padding-right: 20%;
 }
-#instructions{
+#instructions{  /*Used to style the instructions for when they appear*/
   text-align: center;
   font-family: Copperplate Gothic Light;
   font-size: 16px;
   padding-right: 15%;
   padding-left: 15%;
+}
+#turnCounter {  /*Used to align the turn counter text to the right of the top of the screen*/
+  text-align: right;
+  font-size: 18px;
+  padding-right: 2%;
+}
+#submit{       /*Used to style the 'Continue' button */
+  padding: 0.5%;
+  border-radius: 10px;
+  outline-color: #c4c4c4;
+}
+#userChoice{   /*Used to style the text input box from the user*/
+  padding: 0.5%;
+  border-radius: 10px;
+  outline-color: #c4c4c4;
+}
+body{
+  background-color: #c4c4c4;
 }
