@@ -97,7 +97,7 @@ function waterFallRoom() {
     document.getElementById("output").innerHTML = areYouAliveItems[index];
    } else if(choice == jumpIntoWaterfall) {
     insideWaterfallAccess();
-   } else if(choice = jumpIntoWaterfallOther) {
+   } else if (choice == jumpIntoWaterfallOther) {
     insideWaterfallAccess();
    } else if (choice == nothingness) {
     document.getElementById("turnCounter").innerHTML = "Turns: " + numOfTurns;
@@ -167,6 +167,9 @@ function layingDownChainRoom() {
   var choice = document.getElementById("userChoice").value;
   var choice = choice.toLowerCase();
   if (choice == goToChest) {
+    document.getElementById("output").innerHTML = gottenToChest;
+    atChestChainRoomAccess();
+  }else if (choice == goToChestOther) {
     document.getElementById("output").innerHTML = gottenToChest;
     atChestChainRoomAccess();
   } else if (choice == standUp) {
@@ -507,6 +510,8 @@ function armyOfBonesShowAmulet() {
     barrelRoomAccess();
   } else if (choice == goEast) {
     roomOfRiddlesAccess();
+  } else if (choice == goSouth) {
+    treasureRoomAccess();
   }
 }
 function barrelRoomAccess() {
@@ -537,3 +542,44 @@ function barrelRoom() {
     barrelRoomTurnOne();
   }
 }
+function barrelRoomTurnOne() {
+  var choice = document.getElementById("userChoice").value;
+  var choice = choice.toLowerCase();
+  if (choice == goEast) {
+    armyOfBonesDetermine();
+  }
+}
+function treasureRoomAccess() {
+  document.getElementById("submit").onclick = function() {treasureRoom(); turnCounterUpdate();}
+  document.getElementById("output").innerHTML = nothingness;
+  document.getElementById("userChoice").value = nothingness;
+  document.getElementById("areaName").innerHTML = treasureRoomName;
+  document.getElementById("areaText").innerHTML = treasureRoomDesc;
+}
+function treasureRoom() {
+  var choice = document.getElementById("userChoice").value;
+  var choice = choice.toLowerCase();
+  if (choice == goNorth) {
+    armyOfBonesDetermine();
+  } else if (choice == goSouth) {
+    transportRoomAccess();
+  }
+}
+
+
+
+
+
+/*    Transport Room Setup
+function transportRoomAccess() {
+  document.getElementById("submit").onclick = function() {transportRoom(); turnCounterUpdate();}
+  document.getElementById("output").innerHTML = nothingness;
+  document.getElementById("userChoice").value = nothingness;
+  document.getElementById("areaName").innerHTML = transportRoomName;
+  document.getElementById("areaText").innerHTML = transportRoomDesc;
+}
+function transportRoom() {
+  var choice = document.getElementById("userChoice").value;
+  var choice = choice.toLowerCase();
+}
+*/

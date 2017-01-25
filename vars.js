@@ -18,6 +18,7 @@ var turns = 0;   //Used for a turn counter
 var numOfTurns = 0;
 var haveTorchWaterfall = 0;  //Used to determine if the user has picked up the torch from the room behind the waterfall
 var usedAmulet = 0; //Used when the player uses the amulet in the Army Of Bones room
+var unlockedTreasureRoom = 0;  //Used when the player shows the amulet, therefore opening the Treasure Room
 //INPUT / CHECK VALUES
 var barrelRoomTurns = 0;
 var startInput = "start";  
@@ -32,6 +33,7 @@ var killOrc = "kill orc";  //Used to determine if the user wants to kill the orc
 var killOrcOther = "kill the orc";  //Used to determine if the user wants to kill the orc 2/2 (FOR USE IN ORC ROOM)
 var layDown = "lay down";   //Used to determine if the user wants to lay down (FOR USE IN CHAIN ROOM)
 var goToChest = "go to chest";  //Used to determine if the user wants to go to the chest (FOR USE IN CHAIN ROOM)
+var goToChestOther = "go to the chest";
 var standUp = "stand up";  //Used to determine if the user wants to stand up (FOR USE IN CHAIN ROOM ONCE PLAYER IS LAYING DOWN)
 var kickLock = "kick lock";  //Used to determine if the user wants to kick the chest lock 1/2 (FOR USE IN CHAIN ROOM WITH CHEST)
 var kickLockOther = "kick the lock";  //Used to determine if the user wants to kick the chest lock 2/2 (FOR USE IN CHAIN ROOM WITH CHEST)
@@ -91,6 +93,8 @@ var pickedUpKey = "You walk over and grab the key, running the cold metal betwee
 var barrelRoomWallTurnOne = "You peer at the wall, not seeing any discerable door.";
 var tryToCrossChainRoom = "You push yourself against the wall, trying to keep from being hit from the massive ball swinging towards you.  You are frozen in terror when you see the ball headed straight towards you.  You are dead.";
 var insideWaterfallText = "You push off and jump into the roaring gush of water.  You expect to be pulled down and taken wherever the water goes, but your body hits solid ground behind the waterfall.  You are now standing in a small room with carved stone walls and a dark opening on the other side.  A torch on the wall is lighting the room with a flickering shine.";
+var treasureRoomDesc = "As you step into the cavernous room, you are immediately blinded by the staggering piles of gold, silver, and other various jewels.  Magical items and armour are stacked in the corner in neat piles, shimmering with power.  There is one particular piece that amazes you.  A small ring lay on the floor in front of you.  Ther is a large, metallic passageway on the south side of the room.";
+var transportRoomDesc = "Desc";
 //ROOM NAMES
 var startRoomName = "START ROOM";  //START ROOM NEEDS NEW NAME
 var chainRoomName = "CHAIN ROOM";
@@ -103,6 +107,8 @@ var longRoomName = "LONG ROOM";
 var armyOfBonesName = "ARMY OF BONES";  //NEED A NEW IDEA FOR WHAT TO CALL ARMY OF BONES ROOM.
 var roomOfRiddlesName = "ROOM OF RIDDLES";
 var wetRoomName = "CASCADE ROOM";  //Also need inspiration for a new name, it's the room behind the waterfall, new easter egg...
+var treasureRoomName = "TREASURE ROOM";
+var transportRoomName = "TRANSPORT ROOM";
 //ARRAYS
 var areYouAliveItems = ["Hello?  Anyone there?", "Echo...echo...echo...", "I didn't quite catch that."];
 var dontKnowItems  = ["I have no idea what you just said!", "Nope.  Doesn't ring a bell.", "404 - INPUT NOT FOUND"];
