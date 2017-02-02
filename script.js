@@ -5,9 +5,9 @@
 function splashScreen() {
   var choice = document.getElementById("userChoice").value;
   var choice = choice.toLowerCase();
-  if(choice == startInput){
+  if(choice.indexOf(startKeyword) !=-1){
     startRoomAccess();
-  } else if (choice == instructionsInput){
+  } else if (choice.indexOf(instructionsKeyword) !=-1){
     instructionsAccess();
   } else{
     document.getElementById("userChoice").value = nothingness;
@@ -29,16 +29,16 @@ function startRoomAccess() {
 function startRoom() {
   var choice = document.getElementById("userChoice").value;
   var choice = choice.toLowerCase();
-  if (choice == goEast) {
+  if (choice.indexOf(eastKeyword) !=-1) {
     document.getElementById("turnCounter").innerHTML = "Turns: " + numOfTurns;
     waterFallAccess();
-  } else if (choice == goNorth) {
+  } else if (choice.indexOf(northKeyword) !=-1) {
     document.getElementById("turnCounter").innerHTML = "Turns: " + numOfTurns;
     document.getElementById("output").innerHTML = solidWallStart;
-  } else if (choice == goSouth) {
+  } else if (choice.indexOf(southKeyword) !=-1) {
     document.getElementById("turnCounter").innerHTML = "Turns: " + numOfTurns;
     chainRoomAccess();
-  } else if (choice == goWest) {
+  } else if (choice.indexOf(westKeyword) !=-1) {
     document.getElementById("turnCounter").innerHTML = "Turns: " + numOfTurns;
     longRoomAccess();
   } else if (choice == nothingness) {
@@ -65,7 +65,7 @@ function instructionsAccess() {      //Sets up the instruction layout, calls the
 function instructions() {            //Takes input from the user in the instructions area, will only respond to 'start' and will display error message otherwise
   var choice = document.getElementById("userChoice").value;
   var choice = choice.toLowerCase();
-  if (choice == startInput) {
+  if (choice.indexOf(startKeyword) !=-1) {
    document.getElementById("instr1").innerHTML = nothingness;
    document.getElementById("instr2").innerHTML = nothingness;
    document.getElementById("instr3").innerHTML = nothingness;
@@ -85,19 +85,17 @@ function waterFallAccess() {
 function waterFallRoom() {
    var choice = document.getElementById("userChoice").value;
    var choice = choice.toLowerCase();
-   if (choice == goWest) {
+   if (choice.indexOf(westKeyword) !=-1) {
     document.getElementById("turnCounter").innerHTML = "Turns: " + numOfTurns;
     startRoomAccess();
-   } else if (choice == goSouth) {
+   } else if (choice.indexOf(southKeyword) !=-1) {
     document.getElementById("turnCounter").innerHTML = "Turns: " + numOfTurns;
     orcRoomDetect();
-   } else if (choice == goWest) {
+   } else if (choice.indexOf(westKeyword) !=-1) {
     document.getElementById("turnCounter").innerHTML = "Turns: " + numOfTurns;
     var index = Math.floor(Math.random() * areYouAliveItems.length);
     document.getElementById("output").innerHTML = areYouAliveItems[index];
-   } else if(choice == jumpIntoWaterfall) {
-    insideWaterfallAccess();
-   } else if (choice == jumpIntoWaterfallOther) {
+   } else if(choice.indexOf(jumpKeyword) !=-1 && (choice.indexOf(waterfallKeyword) !=-1)) {
     insideWaterfallAccess();
    } else if (choice == nothingness) {
     document.getElementById("turnCounter").innerHTML = "Turns: " + numOfTurns;
@@ -121,9 +119,7 @@ function insideWaterfallAccess() {
 function insideWaterfall() {
   var choice = document.getElementById("submit").value;
   var choice = choice.toLowerCase();
-  if (choice == pickUpTorchWaterfall) {
-    haveTorchWaterfall++;
-  } else if (choice == pickUpTorchWatefallOther) {
+  if (choice.indexOf(pickUpKeyword) !=-1 && (choice.indexOf(torchKeyword) !=-1)) {
     haveTorchWaterfall++;
   }
 }
@@ -137,15 +133,15 @@ function chainRoomAccess() {
 function chainRoom() {
    var choice = document.getElementById("userChoice").value;
    var choice = choice.toLowerCase();
-   if (choice == layDown) {
+   if (choice.indexOf(layKeyword) !=-1) {
      layingDownChainRoomAccess();
-    } else if (choice == goToChest) {
+    } else if (choice.indexOf(goKeyword) !=-1 && (choice.indexOf(chestKeyword) !=-1)) {
      document.getElementById("output").innerHTML = deadByBall;
      playerAlive = playerAlive - 1;
-    } else if (choice == goNorth) {
+    } else if (choice.indexOf(northKeyword) !=-1) {
      startRoomAccess();
     }
-    else if (choice == goEast) {
+    else if (choice.indexOf(eastKeyword) !=-1) {
      document.getElementById("output").innerHTML = tryToCrossChainRoom;
      playerAlive = playerAlive - 1;
     } else if (choice == nothingness) {
@@ -166,21 +162,18 @@ function layingDownChainRoomAccess() {
 function layingDownChainRoom() {
   var choice = document.getElementById("userChoice").value;
   var choice = choice.toLowerCase();
-  if (choice == goToChest) {
+  if (choice.indexOf(goKeyword) !=-1 && (choice.indexOf(chestKeyword) !=-1)) {
     document.getElementById("output").innerHTML = gottenToChest;
     atChestChainRoomAccess();
-  }else if (choice == goToChestOther) {
-    document.getElementById("output").innerHTML = gottenToChest;
-    atChestChainRoomAccess();
-  } else if (choice == standUp) {
+  } else if (choice.indexOf(standKeyword) !=-1) {
     document.getElementById("output").innerHTML = deadByBallStandUp;
   } else if (choice == nothingness) {
     var index = Math.floor(Math.random() * areYouAliveItems.length);
     document.getElementById("output").innerHTML = areYouAliveItems[index];
     document.getElementById("userChoice").value = nothingness;
-  } else if (choice == goNorth) {
+  } else if (choice.indexOf(northKeyword) !=-1) {
     startRoomAccess();
-  } else if (choice == goEast) {
+  } else if (choice.indexOf(eastKeyword) !=-1) {
     magnetRoomAccess();
   } else {
     var index = Math.floor(Math.random() * dontKnowItems.length);
@@ -195,16 +188,10 @@ function atChestChainRoomAccess() {
 function atChestChainRoom() {
   var choice = document.getElementById("userChoice").value;
   var choice = choice.toLowerCase();
-  if (choice == kickLock) {
+  if (choice.indexOf(kickKeyword) !=-1 && (choice.indexOf(lockKeyword) !=-1)) {
     document.getElementById("output").innerHTML = chestOpen;
     chestOpenChainRoomAccess();
-  } else if (choice == kickLockOther) {
-    document.getElementById("output").innerHTML = chestOpen;
-    chestOpenChainRoomAccess();
-  } else if (choice == punchLock) {
-    document.getElementById("output").innerHTML = punchChest;
-    document.getElementById("userChoice").value = nothingness;
-  } else if (choice == punchLockOther) {
+  } else if (choice.indexOf(punchKeyword) !=-1 && (choice.indexOf(lockKeyword) !=-1)) {
     document.getElementById("output").innerHTML = punchChest;
     document.getElementById("userChoice").value = nothingness;
   } else if (choice == nothingness) {
@@ -224,58 +211,19 @@ function chestOpenChainRoomAccess() {
 function chestOpenChainRoom() {
   var choice = document.getElementById("userChoice").value;
   var choice = choice.toLowerCase();
-  if (choice == pickUpKnife) {
+  if (choice.indexOf(pickKeyword) !=-1 && (choice.indexOf(knifeKeyword) !=-1)) {
     document.getElementById("output").innerHTML = pickedUpKnife;
     haveKnife = haveKnife + 1;
-    chainRoomHaveKnifeNoBannerAccess();
-  } else if (choice == pickUpKnifeOther) {
-    document.getElementById("output").innerHTML = pickedUpKnife;
-    haveKnife = haveKnife + 1;
-    chainRoomHaveKnifeNoBannerAccess();
-  } else if (choice == pickUpBanner) {
+  } else if (choice.indexOf(pickKeyword) !=-1 && (choice.indexOf(bannerKeyword) !=-1)) {
     document.getElementById("output").innerHTML = pickedUpBanner;
     haveBanner = haveBanner + 1;
-    chainRoomHaveItemsAccess();
-  } else if (choice == pickUpBannerOther) {
-    document.getElementById("output").innerHTML = pickedUpBanner;
-    haveBanner = haveBanner + 1;
-    chainRoomHaveItemsAccess();
-  }
-}
-function chainRoomHaveKnifeNoBannerAccess() {
-  document.getElementById("submit").onclick = function() {chainRoomHaveKnifeNoBanner(); turnCounterUpdate();}
-  document.getElementById("userChoice").value = nothingness;
-}
-function chainRoomHaveKnifeNoBanner() {
-  var choice = document.getElementById("userChoice").value;
-  var choice = choice.toLowerCase();
-  if (choice == pickUpBanner) {
-    document.getElementById("output").innerHTML = pickedUpBanner;
-    haveBanner = haveBanner + 1;
-  } else if (choice == pickUpBannerOther) {
-    document.getElementById("output").innerHTML = pickedUpBanner;
-    haveBanner = haveBanner + 1;
-  } else if (choice == goNorth) {
-    startRoomAccess();
-  } else if (choice == goEast) {
-    magnetRoomAccess();
-  }
-}
-function chainRoomHaveItemsAccess() {
-  document.getElementById("submit").onclick = function() {chainRoomHaveItems(); turnCounterUpdate();}
-  document.getElementById("output").innerHTML = nothingness;
-  document.getElementById("userChoice").value = nothingness;
-}
-function chainRoomHaveItems() {
-  var choice = document.getElementById("userChoice").value;
-  var choice = choice.toLowerCase();
-  if (choice == goNorth) {
-    startRoomAccess();
-  } else if (choice == goEast) {
-    magnetRoomAccess();
-  } else if (choice == standUp) {
+  } else if (choice.indexOf(standKeyword) !=-1) {
     document.getElementById("output").innerHTML = deadByBallStandUp;
-    playerAlive = playerAlive - 1;
+    playerAlive--;
+  } else if (choice.indexOf(northKeyword) !=-1) {
+    startRoomAccess();
+  } else if (choice.indexOf(eastKeyword) !=-1) {
+    magnetRoomAccess();
   }
 }
 function magnetRoomAccess() {
@@ -288,13 +236,13 @@ function magnetRoomAccess() {
 function magnetRoom() {
   var choice = document.getElementById("userChoice").value;
   var choice = choice.toLowerCase();
-  if (choice == goNorth) {
+  if (choice.indexOf(northKeyword) !=-1) {
     magnetRoomDirectionDetermine();
-  } else if(choice == goSouth) {
+  } else if (choice.indexOf(southKeyword) !=-1) {
     magnetRoomDirectionDetermine();
-  } else if (choice == goEast) {
+  } else if (choice.indexOf(eastKeyword) !=-1) {
     magnetRoomDirectionDetermine();
-  } else if (choice == goWest) {
+  } else if (choice.indexOf(westKeyword) !=-1) {
     magnetRoomDirectionDetermine();
   } else if (choice == nothingness) {
     var index = Math.floor(Math.random() * areYouAliveItems.length);
@@ -332,6 +280,26 @@ function knifeCheck() {
     orcRoomNoKnifeAccess();
   }
 }
+function orcRoomAccess() {
+  document.getElementById("submit").onclick = function() {orcRoom(); turnCounterUpdate();}
+  document.getElementById("output").innerHTML = nothingness;
+  document.getElementById("userChoice").value = nothingness;
+  document.getElementById("areaName").innerHTML = orcRoomName;
+  document.getElementById("areaText").innerHTML = orcRoomDesc;
+}
+function orcRoom() {
+  var choice = document.getElementById("userChoice").value;
+  var choice = choice.toLowerCase();
+  if (choice.indexOf(northKeyword) !=-1) {
+    waterFallAccess();
+  } else if (choice.indexOf(eastKeyword) !=-1) {
+    cliffAccess();
+  } else if (choice.indexOf(westKeyword) !=-1) {
+    magnetRoomAccess();
+  } else if (choice.indexOf(inspectKeyword) !=-1 && (choice.indexOf(orcKeyword) !=-1)) {
+    document.getElementById("output").innerHTML = inspectOrc;
+  }
+}
 function orcRoomHaveKnifeAccess() {
   document.getElementById("submit").onclick = function() {orcRoomHaveKnife(); turnCounterUpdate();}
   document.getElementById("output").innerHTML = nothingness;
@@ -343,11 +311,7 @@ function orcRoomHaveKnife() {
   var choice = document.getElementById("userChoice").value;
   var choice = choice.toLowerCase();
   document.getElementById("userChoice").value = nothingness;
-  if (choice == killOrc) {
-    document.getElementById("output").innerHTML = killedOrc;
-    orcAlive = orcAlive - 1;
-    orcRoomOrcKilledContinueAccess();
-  } else if (choice == killOrcOther) {
+  if (choice.indexOf(killKeyword) !=-1 && (choice.indexOf(orcKeyword) !=-1)) {
     document.getElementById("output").innerHTML = killedOrc;
     orcAlive = orcAlive - 1;
     orcRoomOrcKilledContinueAccess();
@@ -365,11 +329,11 @@ function orcRoomOrcKilledContinueAccess() {
 function orcRoomOrcKilledContinue() {
   var choice = document.getElementById("userChoice").value;
   var choice = choice.toLowerCase();
-  if (choice == goNorth) {
+  if (choice.indexOf(northKeyword) !=-1) {
     waterFallAccess();
-  } else if (choice == goEast) {
+  } else if (choice.indexOf(eastKeyword) !=-1) {
     cliffAccess();
-  } else if (choice == goWest) {
+  } else if (choice.indexOf(westKeyword) !=-1) {
     magnetRoomAccess();
   }
 }
@@ -383,19 +347,24 @@ function orcRoomNoKnifeAccess() {
 function orcRoomNoKnife() {
   var choice = document.getElementById("userChoice").value;
   var choice = choice.toLowerCase();
-  document.getElementById("userChoice").value = nothingness;
-  if (choice == killOrc) {
+  if (choice.indexOf(killKeyword) !=-1 && (choice.indexOf(orcKeyword) !=-1)) {
     document.getElementById("output").innerHTML = tryToKillOrcNoWeapon;
-    playerAlive = playerAlive - 1;
-  } else if (choice == killOrcOther) {
-    document.getElementById("output").innerHTML = tryToKillOrcNoWeapon;
-    playerAlive = playerAlive - 1;
-  } else if (choice == goNorth) {
+    playerAlive--;
+  } else if (choice.indexOf(northKeyword) !=-1) {
     document.getElementById("output").innerHTML = tryToFleeOrcRoom;
-    playerAlive = playerAlive - 1;
+    playerAlive--;
+  } else if (choice.indexOf(eastKeyword) !=-1) {
+    document.getElementById("output").innerHTML = tryToFleeOrcRoom;
+    playerAlive--;
+  } else if (choice.indexOf(westKeyword) !=-1) {
+    document.getElementById("output").innerHTML = tryToFleeOrcRoom;
+    playerAlive--;
+  } else if (choice.indexOf(southKeyword) !=-1) {
+    document.getElementById("output").innerHTML = tryToFleeOrcRoom;
+    playerAlive--;
   } else if (choice == nothingness) {
     document.getElementById("output").innerHTML = waitingOrcRoomDeath;
-    playerAlive = playerAlive - 1;
+    playerAlive--;
   } else {
     var index = Math.floor(Math.random() * dontKnowItems.length);
     document.getElementById("output").innerHTML = dontKnowItems[index];
@@ -412,18 +381,15 @@ function cliffAccess() {
 function cliff() {
   var choice = document.getElementById("userChoice").value;
   var choice = choice.toLowerCase();
-  if (choice == goNorth) {
+  if (choice.indexOf(northKeyword) !=-1) {
     document.getElementById("output").innerHTML = deathByCliff;
-    playerAlive = playerAlive - 1;
-  } else if (choice == goSouth) {
+    playerAlive--;
+  } else if (choice.indexOf(southKeyword) !=-1) {
     document.getElementById("output").innerHTML = nothingness;
     orcRoomDetermine(); 
-  } else if (choice == pickUpAmulet) {
+  } else if (choice.indexOf(pickKeyword) !=-1 && (choice.indexOf(amuletKeyword) !=-1)) {
     document.getElementById("output").innerHTML = pickedUpAmulet;
-    hasAmulet = hasAmulet + 1;
-  } else if (choice == pickUpAmuletOther) {
-    document.getElementById("output").innerHTML = pickedUpAmulet;
-    hasAmulet = hasAmulet + 1;
+    hasAmulet++;
   } else if (choice == nothingness) {
     var index = Math.floor(Math.random() * areYouAliveItems.length);
     document.getElementById("output").innerHTML = areYouAliveItems[index];
@@ -444,11 +410,11 @@ function longRoomAccess() {
 function longRoom() {
   var choice = document.getElementById("userChoice").value;
   var choice = choice.toLowerCase();
-  if (choice == goWest) {
+  if (choice.indexOf(westKeyword) !=-1) {
     startRoomAccess();
-  } else if (choice == goNorth) {
+  } else if (choice.indexOf(northKeyword) !=-1) {
     magnetRoomAccess();
-  } else if (choice == goSouth) {
+  } else if (choice.indexOf(southKeyword) !=-1) {
     armyOfBonesAccess();
   }
 }
@@ -469,13 +435,13 @@ function armyOfBonesNoAmuletAccess() {
 function armyOfBonesNoAmulet() {
   var choice = document.getElementById("userChoice").value;
   var choice = choice.toLowerCase();
-  if (choice == goNorth) {
+  if (choice.indexOf(northKeyword) !=-1) {
     longRoomDesc();
-  } else if (choice == goWest) {
+  } else if (choice.indexOf(westKeyword) !=-1) {
     barrelRoomAccess();
-  } else if (choice == goEast) {
+  } else if (choice.indexOf(eastKeyword) !=-1) {
     roomOfRiddlesAccess();
-  } else if (choice == goSouth) {
+  } else if (choice .indexOf(southKeyword) !=-1) {
     document.getElementById("output").innerHTML = tryToPushSkeletons;
     playerAlive--;
   }
@@ -490,12 +456,17 @@ function armyOfBonesAmuletAccess() {
 function armyOfBonesAmulet() {
   var choice = document.getElementById("userChoice").value;
   var choice = choice.toLowerCase();
-  if (choice == takeOutAmulet) {
+  if (choice.indexOf(takeKeyword) !=-1 && (choice.indexOf(amuletKeyword) !=-1)) {
     usedAmulet++;
     armyOfBonesShowAmuletAccess();
-  } else if (choice == takeOutAmuletOther) {
-    usedAmulet++;
-    armyOfBonesShowAmuletAccess();
+  } else if (choice == nothingness) {
+    var index = Math.floor(Math.random() * areYouAliveItems.length);
+    document.getElementById("output").innerHTML = areYouAliveItems[index];
+    document.getElementById("userChoice").value = nothingness;
+  } else {
+    var index = Math.floor(Math.random() * dontKnowItems.length);
+    document.getElementById("output").innerHTML = dontKnowItems[index];
+    document.getElementById("userChoice").value = nothingness;
   }
 }
 function armyOfBonesShowAmuletAccess() {
@@ -506,12 +477,20 @@ function armyOfBonesShowAmuletAccess() {
 function armyOfBonesShowAmulet() {
   var choice = document.getElementById("userChoice").value;
   var choice = choice.toLowerCase();
-  if (choice == goWest) {
+  if (choice.indexOf(westKeyword) !=-1) {
     barrelRoomAccess();
-  } else if (choice == goEast) {
+  } else if (choice.indexOf(eastKeyword) !=-1) {
     roomOfRiddlesAccess();
-  } else if (choice == goSouth) {
+  } else if (choice.indexOf(southKeyword) !=-1) {
     treasureRoomAccess();
+  } else if (choice == nothingness) {
+    var index = Math.floor(Math.random() * areYouAliveItems.length);
+    document.getElementById("output").innerHTML = areYouAliveItems[index];
+    document.getElementById("userChoice").value = nothingness;
+  } else {
+    var index = Math.floor(Math.random() * dontKnowItems.length);
+    document.getElementById("output").innerHTML = dontKnowItems[index];
+    document.getElementById("userChoice").value = nothingness;
   }
 }
 function barrelRoomAccess() {
@@ -524,29 +503,37 @@ function barrelRoomAccess() {
 function barrelRoom() {
   var choice = document.getElementById("userChoice").value;
   var choice = choice.toLowerCase();
-  if (choice == pickUpKey) {
+  if (choice.indexOf(pickKeyword) !=-1 & (choice.indexOf(keyKeyword) !=-1)) {
     haveKey++;
     document.getElementById("output").innerHTML = pickedUpKey;
     barrelRoomTurnOne();
-  } else if (choice == pickUpKeyOther) {
+  } else if (choice.indexOf(grabKeyword) !=-1 && (choice.indexOf(keyKeyword) !=-1)) {
     haveKey++;
     document.getElementById("output").innerHTML = pickedUpKey;
     barrelRoomTurnOne();
-  } else if (choice == grabKey) {
-    haveKey++;
-    document.getElementById("output").innerHTML = pickedUpKey;
-    barrelRoomTurnOne();
-  } else if (choice == grabKeyOther) {
-    haveKey++;
-    document.getElementById("output").innerHTML = pickedUpKey;
-    barrelRoomTurnOne();
+  } else if (choice == nothingness) {
+    var index = Math.floor(Math.random() * areYouAliveItems.length);
+    document.getElementById("output").innerHTML = areYouAliveItems[index];
+    document.getElementById("userChoice").value = nothingness;
+  } else {
+    var index = Math.floor(Math.random() * dontKnowItems.length);
+    document.getElementById("output").innerHTML = dontKnowItems[index];
+    document.getElementById("userChoice").value = nothingness;
   }
 }
 function barrelRoomTurnOne() {
   var choice = document.getElementById("userChoice").value;
   var choice = choice.toLowerCase();
-  if (choice == goEast) {
+  if (choice.indexOf(eastKeyword) !=-1) {
     armyOfBonesDetermine();
+  } else if (choice == nothingness) {
+    var index = Math.floor(Math.random() * areYouAliveItems.length);
+    document.getElementById("output").innerHTML = areYouAliveItems[index];
+    document.getElementById("userChoice").value = nothingness;
+  } else {
+    var index = Math.floor(Math.random() * dontKnowItems.length);
+    document.getElementById("output").innerHTML = dontKnowItems[index];
+    document.getElementById("userChoice").value = nothingness;
   }
 }
 function treasureRoomAccess() {
@@ -559,18 +546,12 @@ function treasureRoomAccess() {
 function treasureRoom() {
   var choice = document.getElementById("userChoice").value;
   var choice = choice.toLowerCase();
-  if (choice == goNorth) {
+  if (choice.indexOf(northKeyword) !=-1) {
     armyOfBonesDetermine();
-  } else if (choice == goSouth) {
+  } else if (choice.indexOf(southKeyword) !=-1) {
     transportRoomAccess();
   }
 }
-
-
-
-
-
-/*    Transport Room Setup
 function transportRoomAccess() {
   document.getElementById("submit").onclick = function() {transportRoom(); turnCounterUpdate();}
   document.getElementById("output").innerHTML = nothingness;
@@ -582,4 +563,3 @@ function transportRoom() {
   var choice = document.getElementById("userChoice").value;
   var choice = choice.toLowerCase();
 }
-*/
